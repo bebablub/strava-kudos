@@ -13,11 +13,11 @@ jobs:
   run-kudos-cron:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3 
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.7.6'
-          cache: 'pip'
+          python-version: "3.7.6"
+          cache: "pip"
       - run: pip install -r requirements.txt
       - run: playwright install
       - run: |
@@ -30,11 +30,11 @@ jobs:
   run-kudos-club-cron:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3 
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.7.6'
-          cache: 'pip'
+          python-version: "3.7.6"
+          cache: "pip"
       - run: pip install -r requirements.txt
       - run: playwright install
       - run: |
@@ -44,4 +44,3 @@ jobs:
           echo ::set-output name=status::$status
       - if: steps.run.outputs.status != '0'
       - run: exit "${{ steps.run.outputs.status }}"
-        
