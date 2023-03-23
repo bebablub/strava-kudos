@@ -11,7 +11,7 @@ class KudosGiver:
     Following. Additionally, scrolls down to check for more activities
     until no more kudos can be given at this time.
     """
-    def __init__(self, max_retry_scroll=10, max_run_duration=540) -> None:
+    def __init__(self, max_retry_scroll=10, max_run_duration=240) -> None:
         self.EMAIL = os.environ.get('STRAVA_EMAIL')
         self.PASSWORD = os.environ.get('STRAVA_PASSWORD')
 
