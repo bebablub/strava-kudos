@@ -20,7 +20,13 @@ jobs:
           cache: 'pip'
       - run: pip install -r requirements.txt
       - run: playwright install
-      - run: python give_kudos.py
+      - run: |
+          echo Kudos...
+          status=$(python give_kudos.py > log.txt 2>&1; echo $?)
+          cat log.txt
+          echo ::set-output name=status::$status
+      - if: steps.run.outputs.status != '0'
+      - run: exit "${{ steps.run.outputs.status }}"
   run-kudos-club-cron:
     runs-on: ubuntu-20.04
     steps:
@@ -31,5 +37,11 @@ jobs:
           cache: 'pip'
       - run: pip install -r requirements.txt
       - run: playwright install
-      - run: python give_kudos_club.py
+      - run: |
+          echo Club Kudos...
+          status=$(python give_kudos_club.py > log.txt 2>&1; echo $?)
+          cat log.txt
+          echo ::set-output name=status::$status
+      - if: steps.run.outputs.status != '0'
+      - run: exit "${{ steps.run.outputs.status }}"
         
