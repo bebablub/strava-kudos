@@ -13,34 +13,23 @@ jobs:
   run-kudos-cron:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3 
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.7.6"
-          cache: "pip"
+          python-version: '3.7.6'
+          cache: 'pip'
       - run: pip install -r requirements.txt
       - run: playwright install
-      - run: |
-          echo Kudos...
-          status=$(python give_kudos.py > log.txt 2>&1; echo $?)
-          cat log.txt
-          echo ::set-output name=status::$status
-      - if: steps.run.outputs.status != '0'
-      - run: exit "${{ steps.run.outputs.status }}"
+      - run: python give_kudos.py
   run-kudos-club-cron:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3 
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.7.6"
-          cache: "pip"
+          python-version: '3.7.6'
+          cache: 'pip'
       - run: pip install -r requirements.txt
       - run: playwright install
-      - run: |
-          echo Club Kudos...
-          status=$(python give_kudos_club.py > log.txt 2>&1; echo $?)
-          cat log.txt
-          echo ::set-output name=status::$status
-      - if: steps.run.outputs.status != '0'
-      - run: exit "${{ steps.run.outputs.status }}"
+      - run: python give_kudos_club.py
+        
