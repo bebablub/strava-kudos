@@ -10,7 +10,7 @@ env:
   STRAVA_EMAIL: ${{ secrets.STRAVA_EMAIL }}
   STRAVA_PASSWORD: ${{ secrets.STRAVA_PASSWORD }}
 jobs:
-  run-kudos-cron:
+  run-kudos-own-cron:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 
@@ -21,10 +21,9 @@ jobs:
       - run: pip install -r requirements.txt
       - run: playwright install
       - run: python give_kudos.py
-  run-kudos-club-cron:
+  run-kudos-club-rgb-cron:
     runs-on: ubuntu-20.04
     steps:
-      - name: Club Landkreis Regensburg
       - uses: actions/checkout@v3 
       - uses: actions/setup-python@v4
         with:
@@ -33,7 +32,10 @@ jobs:
       - run: pip install -r requirements.txt
       - run: playwright install
       - run: python give_kudos_club_rgb.py
-      - name: Club Regensburg MTB
+  run-kudos-club-mtb-cron:
+    needs: run-kudos-club-rgb-cron
+    runs-on: ubuntu-20.04
+    steps:
       - uses: actions/checkout@v3 
       - uses: actions/setup-python@v4
         with:
@@ -42,3 +44,51 @@ jobs:
       - run: pip install -r requirements.txt
       - run: playwright install
       - run: python give_kudos_club_mtb.py
+  run-kudos-club-oberpfalz-cron:
+    needs: run-kudos-club-mtb-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_oberpfalz.py
+  run-kudos-club-waidla-cron:
+    needs: run-kudos-club-oberpfalz-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_waidla.py          
+  run-kudos-club-amberg-cron:
+    needs: run-kudos-club-waidla-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_amberg.py
+  run-kudos-club-altmuehl-cron:
+    needs: run-kudos-club-amberg-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_altmuehl.py  
