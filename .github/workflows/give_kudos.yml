@@ -27,18 +27,18 @@ jobs:
       - name: Club Landkreis Regensburg
         uses: actions/checkout@v3 
         uses: actions/setup-python@v4
-          with:
-            python-version: '3.7.6'
-            cache: 'pip'
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
         run: pip install -r requirements.txt
         run: playwright install
         run: python give_kudos_club_rgb.py
       - name: Club Regensburg MTB
         uses: actions/checkout@v3 
         uses: actions/setup-python@v4
-          with:
-            python-version: '3.7.6'
-            cache: 'pip'
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
         run: pip install -r requirements.txt
         run: playwright install
         run: python give_kudos_club_mtb.py
