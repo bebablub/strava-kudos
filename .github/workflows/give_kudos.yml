@@ -92,8 +92,8 @@ jobs:
       - run: pip install -r requirements.txt
       - run: playwright install
       - run: python give_kudos_club_altmuehl.py
-  run-kudos-club-altmuehl-cron:
-    needs: run-kudos-club-arber-cron
+  run-kudos-club-arber-cron:
+    needs: run-kudos-club-altmuehl-cron
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 
@@ -117,7 +117,7 @@ jobs:
       - run: playwright install
       - run: python give_kudos_club_wuidsau.py
   run-kudos-club-gravel-cron:
-    needs: run-kudos-club-arber-cron
+    needs: run-kudos-club-wuidsau-cron
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 
