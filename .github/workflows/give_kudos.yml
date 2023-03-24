@@ -91,4 +91,40 @@ jobs:
           cache: 'pip'
       - run: pip install -r requirements.txt
       - run: playwright install
-      - run: python give_kudos_club_altmuehl.py  
+      - run: python give_kudos_club_altmuehl.py
+  run-kudos-club-altmuehl-cron:
+    needs: run-kudos-club-arber-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_arber.py
+  run-kudos-club-wuidsau-cron:
+    needs: run-kudos-club-arber-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_wuidsau.py
+  run-kudos-club-gravel-cron:
+    needs: run-kudos-club-arber-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_gravel.py
