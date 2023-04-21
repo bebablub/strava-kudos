@@ -1,0 +1,86 @@
+name: Give Strava Kudos on non important clubs
+
+on:
+  # Triggers every 9:30am
+  schedule:
+    - cron: "40 5-23/9 * * *"
+  workflow_dispatch:
+
+env:
+  STRAVA_EMAIL: ${{ secrets.STRAVA_EMAIL }}
+  STRAVA_PASSWORD: ${{ secrets.STRAVA_PASSWORD }}
+jobs:
+  run-kudos-club-bavaria-cron:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_bavaria.py
+  run-kudos-club-bavarian-cron:
+    needs: run-kudos-club-bavaria-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_bavarian.py
+  run-kudos-club-weltkultur-cron:
+    needs: run-kudos-club-bavarian-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_weltkultur.py
+  run-kudos-club-veloclub-cron:
+    needs: run-kudos-club-weltkultur-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_veloclub.py
+  run-kudos-club-stadtradeln-cron:
+    needs: run-kudos-club-veloclub-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_stadtradeln.py
+  run-kudos-club-jurasteig-cron:
+    needs: run-kudos-club-stadtradeln-cron
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.6'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - run: playwright install
+      - run: python give_kudos_club_jurasteig.py      
+
+
+      
