@@ -34,9 +34,9 @@ class KudosGiver:
         Login using email and password
         """
         self.page.goto(os.path.join(BASE_URL, 'login'))
-        self.page.fill('#email', self.EMAIL)
-        self.page.fill("#password", self.PASSWORD)
-        self.page.click("button[type='submit']")
+        self.page.get_by_role("textbox", name='email').fill(self.EMAIL)
+        self.page.get_by_role("textbox", name="password").fill(self.PASSWORD)
+        self.page.get_by_role("button", name="Log In").click()
         print("---Logged in!!---")
         self.page.goto(os.path.join(BASE_URL, "dashboard"), wait_until="domcontentloaded")
         
